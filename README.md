@@ -1,0 +1,2 @@
+# jajanken
+First git repo
