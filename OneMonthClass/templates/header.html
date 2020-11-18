@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>
+
+			{% if title=="About" %}
+			About Page
+			{% elif title=="Contact" %}
+			Contact Page
+			{% else %}
+			Homepage
+			{% endif %}
+
+
+		</title>
+	</head>
+	<body>
+    <a href="/">To Homepage </a>
+    <a href="/about"> To About Page </a>
+		<a href="/contact"> To Contact Page </a>
+
+
+<!-- headers allow to repeat code throughout flask app -->
