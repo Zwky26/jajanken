@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import json
-import regex as re
+import re
 
 def jprint(obj):
     # create a formatted string of the Python JSON object
