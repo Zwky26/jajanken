@@ -41,17 +41,6 @@ var fs_1 = require("fs");
 var path_1 = require("path");
 var pako_1 = require("pako");
 var JSZip = require("jszip");
-/*const readFile = (file, type) => new Observable<string | BlobPart>(subscriber => {
-    //not sure if this func is necessary, or if it complicates
-    file.async(type).then(
-      result => {
-        subscriber.next(result)
-        subscriber.complete()
-      },
-      error => subscriber.error(error)
-    )
-  })
-*/
 function getAsByteArray(name) {
     return __awaiter(this, void 0, void 0, function () {
         var filecontents, b, err_1;
@@ -144,17 +133,17 @@ function generateFile(filename) {
 //readFile('scan-report.etl');
 //getAsByteArray('scan.txt.etl');
 var wrapperfunc = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var fileconts, jszipInstance, unzipped, keys, _i, keys_1, key, item, _a, _b, _c, _d;
+    var fileconts, jszipInstance, unzipped, keys, _i, keys_1, key, item, _a, _b, _c, _d, mapping;
     return __generator(this, function (_e) {
         switch (_e.label) {
             case 0:
-                fileconts = (0, fs_1.readFileSync)('scan-report.etl');
+                fileconts = (0, fs_1.readFileSync)('err1.etl');
                 jszipInstance = new JSZip();
                 return [4 /*yield*/, jszipInstance.loadAsync(fileconts)];
             case 1:
                 unzipped = _e.sent();
-                console.log(unzipped);
                 keys = Object.keys(unzipped.files);
+                console.log(keys);
                 _i = 0, keys_1 = keys;
                 _e.label = 2;
             case 2:
@@ -171,7 +160,10 @@ var wrapperfunc = function () { return __awaiter(void 0, void 0, void 0, functio
             case 4:
                 _i++;
                 return [3 /*break*/, 2];
-            case 5: return [2 /*return*/];
+            case 5:
+                mapping = unzipped.files['scan-report.json'];
+                console.log(mapping);
+                return [2 /*return*/];
         }
     });
 }); };

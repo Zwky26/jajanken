@@ -5,17 +5,6 @@ import { of, Observable, pipe} from 'rxjs';
 import { inflateRaw, inflate }  from 'pako';
 import * as JSZip from 'jszip';
 import { file } from 'jszip';
-/*const readFile = (file, type) => new Observable<string | BlobPart>(subscriber => {
-    //not sure if this func is necessary, or if it complicates
-    file.async(type).then(
-      result => {
-        subscriber.next(result)
-        subscriber.complete()
-      },
-      error => subscriber.error(error)
-    )
-  })
-*/
 
 async function getAsByteArray(name: string) {
   try{
@@ -56,40 +45,21 @@ async function generateFile(filename: string) {
     //const reportFile = new File([blob], 'output.xlsx');
     }
     
-/*
-    if (isJson) {
-      return readFile('string')
-        .pipe(
-          tap(content => this.loadMapping(content))
-        )
-    } else {
-      return readFile('blob')
-        .pipe(
-          switchMap(content => {
-            const blob = new Blob([content], {type: MediaType.XLSX});
-            const reportFile = new File([blob], file.name, {type: MediaType.XLSX});
-            return this.loadReport([reportFile]);
-          })
-        )
-    }
-*/
-//const blob = new Blob([content], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-//const reportFile = new File([blob], file.name, {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
 
-//generateFile('scan.txt.etl');
-//readFile('scan-report.etl');
-//getAsByteArray('scan.txt.etl');
 const wrapperfunc = async () => {
-  const fileconts = readFileSync('scan-report.etl');
+  const fileconts = readFileSync('err1.etl');
   //console.log(fileconts);
   const jszipInstance = new JSZip();
   const unzipped = await jszipInstance.loadAsync(fileconts);
-  console.log(unzipped);
+  //console.log(unzipped);
   const keys = Object.keys(unzipped.files);
+  console.log(keys);
   for (let key of keys) {
     const item = unzipped.files[key];
     writeFileSync(item.name, Buffer.from(await item.async('arraybuffer')));
   }
+  const mapping = unzipped.files['scan-report.json'];
+  console.log(mapping);
 }
 
 wrapperfunc();
